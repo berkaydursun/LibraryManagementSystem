@@ -138,6 +138,27 @@ public class MYSQLConnection {
         return books;
     }
     
+    public boolean controlID(String id){
+        String query="SELECT id FROM member";
+        
+        try {
+                statement=con.createStatement();           
+                ResultSet rs=  statement.executeQuery(query);  
+                while(rs.next()){
+                String ID=rs.getString("id");
+                if(id.equals(ID)){
+                    return true;
+                }
+                
+                }
+          
+        }   catch (SQLException ex) {
+                Logger.getLogger(MYSQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+
+        }
+    
     
     
     

@@ -6,7 +6,7 @@
 package librarymanagementsystem;
 
 import database.MYSQLConnection;
-import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,12 +19,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import model.Captcha;
 
 /**
  *
@@ -43,9 +44,14 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     TextField id;
-    
     @FXML
     TextField password;
+    @FXML
+    TextField captchaText;
+    
+    
+    @FXML
+    Label captchaLabel;
     
     @FXML
     private void signupButtonAction(ActionEvent event) throws IOException {
@@ -87,7 +93,9 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-      
+        
+        String Cpt = new Captcha().getCaptcha();
+        captchaLabel.setText(Cpt);
         
     }    
     

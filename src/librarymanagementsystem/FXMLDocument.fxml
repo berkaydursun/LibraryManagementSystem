@@ -13,31 +13,37 @@
 
 <AnchorPane id="AnchorPane" prefHeight="731.0" prefWidth="1321.0" stylesheets="@../styles/loginScreen.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarymanagementsystem.FXMLDocumentController">
    <children>
-      <VBox layoutX="736.0" layoutY="186.0" prefHeight="345.0" prefWidth="578.0" spacing="30.0">
+      <VBox layoutX="776.0" layoutY="186.0" prefHeight="576.0" prefWidth="538.0" spacing="30.0">
          <children>
-            <AnchorPane prefHeight="351.0" prefWidth="578.0">
+            <AnchorPane prefHeight="498.0" prefWidth="578.0">
                <children>
-                  <TextField fx:id="id" alignment="CENTER" focusTraversable="false" layoutX="177.0" layoutY="54.0" promptText="Enter ID Number ">
+                  <TextField fx:id="id" alignment="CENTER" focusTraversable="false" layoutX="175.0" layoutY="14.0" promptText="Enter ID Number ">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="192.0" layoutY="191.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="31.0" prefWidth="212.0" text="LOG IN">
+                  <Button layoutX="188.0" layoutY="354.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="31.0" prefWidth="212.0" text="LOG IN">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="192.0" layoutY="250.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="213.0" text="Forget Password ? ">
+                  <Button layoutX="189.0" layoutY="431.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="213.0" text="Forget Password ? ">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <PasswordField fx:id="password" alignment="TOP_CENTER" layoutX="177.0" layoutY="121.0" promptText="Enter Password" />
+                  <PasswordField fx:id="password" alignment="TOP_CENTER" layoutX="174.0" layoutY="77.0" promptText="Enter Password" />
+                  <Label fx:id="captchaLabel" alignment="CENTER" layoutX="183.0" layoutY="160.0" prefHeight="68.0" prefWidth="223.0" style="-fx-background-color: rgba(160, 83, 68,1);;" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="43.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="captchaText" alignment="CENTER" layoutX="177.0" layoutY="259.0" promptText="ENTER CAPTCHA" />
                </children>
             </AnchorPane>
          </children>
       </VBox>
-      <Label alignment="CENTER" layoutX="920.0" layoutY="114.0" prefHeight="68.0" prefWidth="211.0" text="SIGN IN" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="965.0" layoutY="86.0" prefHeight="68.0" prefWidth="211.0" text="SIGN IN" textFill="WHITE">
          <font>
             <Font size="37.0" />
          </font>
