@@ -43,14 +43,15 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     TextField id;
+    
     @FXML
     TextField password;
     
     @FXML
     private void signupButtonAction(ActionEvent event) throws IOException {
     
-         Parent root2=FXMLLoader.load(getClass().getResource("SignUp.fxml"));
-         Scene scene2=new Scene(root2);
+        Parent root2=FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+        Scene scene2=new Scene(root2);
     
     
         Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
@@ -62,12 +63,19 @@ public class FXMLDocumentController implements Initializable {
     
     
     @FXML
-    private void loginButtonAction(ActionEvent event){
+    private void loginButtonAction(ActionEvent event) throws IOException{
      
         
         if(connection.controlLogin(id.getText(), password.getText())==true){
         JOptionPane.showMessageDialog(null, "WELCOME ! ");
+        
+            Parent root3=FXMLLoader.load(getClass().getResource("FXMLHome.fxml"));
+            Scene scene3=new Scene(root3);
 
+
+            Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(scene3);
+            window.show();
          
         }
         else{

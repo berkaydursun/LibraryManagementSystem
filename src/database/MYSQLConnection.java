@@ -13,6 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.Books;
 
 /**
  *
@@ -26,7 +29,7 @@ public class MYSQLConnection {
     private String host="localhost";
     private int port=3306;
     
-   private Connection con=getConnection();
+    private Connection con=getConnection();
     
     private Statement statement=null;
     
@@ -34,16 +37,20 @@ public class MYSQLConnection {
 
     private MYSQLConnection(){
     }
-         public static MYSQLConnection getInstance(){
-    if(instance==null){
-    synchronized (MYSQLConnection.class) {
-        if (instance==null) {
-	instance=new MYSQLConnection();
+    
+    public static MYSQLConnection getInstance()
+    {
+        if(instance==null)
+        {
+            synchronized (MYSQLConnection.class) 
+            {
+                if (instance==null) 
+                {
+                    instance=new MYSQLConnection();
+                }
+            }
         }
-    }
-   
-}
-  return instance;
+        return instance;
     }
          
     public Connection getConnection(){
@@ -56,14 +63,14 @@ public class MYSQLConnection {
         }
         
         try {
-           con=(Connection) DriverManager.getConnection(url,username,password);
+            con=(Connection) DriverManager.getConnection(url,username,password);
             System.out.println("Connection Succesfull");
             
         } catch (SQLException ex) {
             System.out.println("Connection Unsuccessfull");
         }
     
-		return con;
+        return con;
 	
     }
     
@@ -73,8 +80,7 @@ public class MYSQLConnection {
     
     //Adding data to database 
     public void add(String query){
-        try {
-            
+        try {   
             statement=con.createStatement();
             statement.executeUpdate(query);
             System.out.println("Successfully added");
@@ -91,18 +97,45 @@ public class MYSQLConnection {
           statement=con.createStatement();           
           ResultSet rs=  statement.executeQuery(query);  
           while(rs.next()){
-          String member_id=rs.getString("id");
-          String member_password=rs.getString("password");
-          if(member_id.equals(id)&&member_password.equals(password)){
-             return true;
-          }
-          
+            String member_id=rs.getString("id");
+            String member_password=rs.getString("password");
+            if(member_id.equals(id)&&member_password.equals(password)){
+               return true;
+            }
           }  
         } catch (SQLException ex) {
             Logger.getLogger(MYSQLConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-    return false;
+        return false;
+    }
     
+    //writing books on table view from database.
+    public ObservableList<Books> getBook()
+    {
+        ObservableList<Books> books = FXCollections.observableArrayList();
+        String query="Select * From books";
+        try {
+          statement = con.createStatement();           
+          ResultSet rs =  statement.executeQuery(query);  
+          
+          while(rs.next()){
+              
+              String bookId=rs.getString("bookId");
+              String bookName=rs.getString("bookName");
+              String authorName=rs.getString("authorName");
+              String publisherName=rs.getString("publisherName");
+              int pageNumber=Integer.parseInt(rs.getString("pageNumber"));
+              int favCount=Integer.parseInt(rs.getString("favCount"));
+              String bookImage=rs.getString("bookImage");
+              int stock=Integer.parseInt(rs.getString("stock"));
+              
+              books.add(new Books(bookId,bookName,authorName,publisherName,pageNumber,stock,favCount,bookImage));//creating book object
+              
+          }  
+        } catch (SQLException ex) {
+            Logger.getLogger(MYSQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return books;
     }
     
     
