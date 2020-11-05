@@ -160,6 +160,18 @@ public class MYSQLConnection {
         }
     
     
+    // Update Book Fav when click favorite button. 
+    public void update(String query){
+     try {   
+            statement=con.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Successfully updated");
+        } catch (SQLException ex) {
+            Logger.getLogger(MYSQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     
     
     

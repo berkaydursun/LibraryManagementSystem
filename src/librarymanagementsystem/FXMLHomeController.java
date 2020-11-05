@@ -8,8 +8,6 @@ package librarymanagementsystem;
 import database.MYSQLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -117,6 +115,17 @@ public class FXMLHomeController implements Initializable {
             stok.setText(String.valueOf(book.getPageNumber()));
             System.out.println(book.getBookName()+" "+book.getAuthorName()+" "+book.getPublisherName()+" "+book.getPageNumber()+" "+book.getFavCount()+" "+book.getStock()+" "+book.getBookImage());
         }
+    }
+    
+    @FXML
+    private void bookFavAction(ActionEvent event){
+    Books book =tableView.getSelectionModel().getSelectedItem();
+    String bookID=book.getBookId();
+    connection.update("UPDATE books SET favCount = favCount + " + 1 +
+    " WHERE bookId ="+bookID);
+    
+    
+    
     }
     
 }

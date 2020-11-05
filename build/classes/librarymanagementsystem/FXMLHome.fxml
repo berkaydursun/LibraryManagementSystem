@@ -112,7 +112,7 @@
             </HBox>
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="77.0" prefWidth="300.0">
                <children>
-                  <Button fx:id="favButton" mnemonicParsing="false" prefHeight="16.0" prefWidth="107.0" styleClass="favButton" text="FAVORITE">
+                  <Button fx:id="favButton" mnemonicParsing="false" onAction="#bookFavAction" prefHeight="16.0" prefWidth="107.0" styleClass="favButton" text="FAVORITE">
                      <font>
                         <Font size="15.0" />
                      </font>
