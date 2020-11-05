@@ -23,6 +23,12 @@
     -fx-border-color: white;
 }
 
+.button:hover{
+    -fx-background-color: white;
+    -fx-text-fill: rgba(160, 83, 68,1);
+}
+
+
 #signup{
     -fx-background-color:rgba(160, 83, 68,0.7);
     -fx-text-fill: white;

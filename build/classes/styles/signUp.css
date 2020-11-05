@@ -30,3 +30,8 @@ and open the template in the editor.
 .button:pressed{
     -fx-border-color: white;
 }
+
+.button:hover{
+    -fx-background-color: white;
+    -fx-text-fill: rgba(160, 83, 68,1);
+}
