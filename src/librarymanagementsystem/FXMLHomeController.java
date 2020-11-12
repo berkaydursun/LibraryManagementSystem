@@ -6,11 +6,16 @@
 package librarymanagementsystem;
 
 import database.MYSQLConnection;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -21,12 +26,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.Books;
 /**
  *
  * @author Musibet
  */
 public class FXMLHomeController implements Initializable {
+        
     
     private Label label;
     @FXML
@@ -80,6 +87,10 @@ public class FXMLHomeController implements Initializable {
     @FXML
     private TableColumn<Books, String> bookIdColumn;
     
+    @FXML 
+    private ImageView searchBookButton;
+    
+    
     MYSQLConnection connection=MYSQLConnection.getInstance();
     
    
@@ -127,5 +138,20 @@ public class FXMLHomeController implements Initializable {
     
     
     }
+    
+    @FXML
+    private void searchButtonAction(MouseEvent event) throws IOException{
+    
+        Parent root5=FXMLLoader.load(getClass().getResource("FXMLSearch.fxml"));
+        Scene scene5=new Scene(root5);
+    
+    
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene5);
+        window.show();
+        
+    }
+    
+    
     
 }
