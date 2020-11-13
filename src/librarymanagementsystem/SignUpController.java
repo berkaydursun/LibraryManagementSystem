@@ -72,11 +72,11 @@ public class SignUpController implements Initializable {
     public void signUpButtonaction(ActionEvent event) throws IOException{
     //Object Created by using form infos
     member=new Member(memberID.getText(),memberPassword.getText(),memberFName.getText(),
-    memberLName.getText(),memberBirth.getValue().toString(),memberMail.getText(),memberTel.getText());
+    memberLName.getText(),memberBirth.getValue().toString(),memberMail.getText(),memberTel.getText(),0);
     if(control==true){
         JOptionPane.showMessageDialog(null,"Successfully Registered !");
     
-    connection.add("INSERT INTO member(id,password,fname,lname,birth,mail,tel,borrowBookNum) VALUES ("+"'"+member.getID()+"'"+","+"'"+
+    connection.SQLOperations("INSERT INTO member(id,password,fname,lname,birth,mail,tel,borrowBookNum) VALUES ("+"'"+member.getID()+"'"+","+"'"+
             member.getPassword()+"'"+","+"'"+member.getFirstName()+"'"+","+"'"+
             member.getLastName()+"'"+","+"'"+member.getBirth()+"'"+","+"'"+ 
             member.getMail()+"'"+","+"'"+

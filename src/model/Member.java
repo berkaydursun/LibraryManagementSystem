@@ -20,7 +20,7 @@ public class Member {
     private String tel;
     private int borrowingNumber;
 
-    public Member(String ID, String password, String firstName, String lastName, String birth, String mail, String tel) {
+    public Member(String ID, String password, String firstName, String lastName, String birth, String mail, String tel, int borrowingNumber) {
         this.ID = ID;
         this.password = password;
         this.firstName = firstName;
@@ -28,6 +28,7 @@ public class Member {
         this.birth = birth;
         this.mail = mail;
         this.tel = tel;
+        this.borrowingNumber=borrowingNumber;
     
     }
 

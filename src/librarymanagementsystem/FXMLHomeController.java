@@ -6,21 +6,28 @@
 package librarymanagementsystem;
 
 import database.MYSQLConnection;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.Books;
 /**
  *
@@ -28,11 +35,6 @@ import model.Books;
  */
 public class FXMLHomeController implements Initializable {
     
-    private Label label;
-    @FXML
-    private AnchorPane anchorPane;
-    @FXML
-    private VBox VBLayout;
     @FXML
     private ImageView bookImage;
     @FXML
@@ -48,23 +50,7 @@ public class FXMLHomeController implements Initializable {
     @FXML
     private Label favCount;
     @FXML
-    private Button favButton;
-    @FXML
-    private HBox HBLayout;
-    @FXML
     private TableView<Books> tableView;
-    @FXML
-    private Label bookName1;
-    @FXML
-    private Label authorName1;
-    @FXML
-    private Label publisherName1;
-    @FXML
-    private Label pageNumber1;
-    @FXML
-    private Label favCount11;
-    @FXML
-    private Label stok1;
     @FXML
     private TableColumn<Books, String> bookNameColumn;
     @FXML
@@ -82,6 +68,28 @@ public class FXMLHomeController implements Initializable {
     
     MYSQLConnection connection=MYSQLConnection.getInstance();
     
+    @FXML
+    private AnchorPane anchorPane;
+    @FXML
+    private VBox VBLayout;
+    @FXML
+    private Label bookName1;
+    @FXML
+    private Label authorName1;
+    @FXML
+    private Label publisherName1;
+    @FXML
+    private Label pageNumber1;
+    @FXML
+    private Label favCount11;
+    @FXML
+    private Label stok1;
+    @FXML
+    private Button favButton;
+    @FXML
+    private HBox HBLayout;
+    
+    
    
     
     @Override
@@ -96,6 +104,8 @@ public class FXMLHomeController implements Initializable {
         favColumn.setCellValueFactory(new PropertyValueFactory<>("favCount"));
         
         tableView.setItems(connection.getBook());
+        
+        
     }  
 
     @FXML
@@ -107,6 +117,7 @@ public class FXMLHomeController implements Initializable {
         }
         else
         {
+            bookImage.setImage(new Image("Images/"+book.getBookImage()));
             bookName.setText(book.getBookName());
             authorName.setText(book.getAuthorName());
             publisherName.setText(book.getPublisherName());
@@ -119,13 +130,34 @@ public class FXMLHomeController implements Initializable {
     
     @FXML
     private void bookFavAction(ActionEvent event){
-    Books book =tableView.getSelectionModel().getSelectedItem();
-    String bookID=book.getBookId();
-    connection.update("UPDATE books SET favCount = favCount + " + 1 +
-    " WHERE bookId ="+bookID);
+        Books book =tableView.getSelectionModel().getSelectedItem();
+        String bookID=book.getBookId();
+        connection.SQLOperations("UPDATE books SET favCount = favCount + " + 1 +
+        " WHERE bookId ="+bookID);
+        book.setFavCount(book.getFavCount()+1);
+        tableView.refresh();
+    }
+
+    @FXML
+    private void clickBookOperations(MouseEvent event) throws IOException {
+        Parent root=FXMLLoader.load(getClass().getResource("FXMLBookOperations.fxml"));
+        Scene scene=new Scene(root);
     
     
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+    }
+
+    @FXML
+    private void clickMemberOperations(MouseEvent event) throws IOException {
+        Parent root=FXMLLoader.load(getClass().getResource("FXMLMemberOperations.fxml"));
+        Scene scene=new Scene(root);
     
+    
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
     }
     
 }

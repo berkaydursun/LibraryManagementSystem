@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Books;
+import model.Member;
 
 /**
  *
@@ -78,17 +79,6 @@ public class MYSQLConnection {
     // ******** MYSQL OPERATIONS *********
     
     
-    //Adding data to database 
-    public void add(String query){
-        try {   
-            statement=con.createStatement();
-            statement.executeUpdate(query);
-            System.out.println("Successfully added");
-        } catch (SQLException ex) {
-            Logger.getLogger(MYSQLConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-    }
     
     //Controlling login according to database member infos
     public boolean controlLogin(String id,String password){
@@ -159,18 +149,44 @@ public class MYSQLConnection {
 
         }
     
-    
-    // Update Book Fav when click favorite button. 
-    public void update(String query){
-     try {   
+    // all sql operation add update delete 
+    public void SQLOperations(String query){
+        try {   
             statement=con.createStatement();
             statement.executeUpdate(query);
-            System.out.println("Successfully updated");
+            System.out.println("Operations done successfully.");
         } catch (SQLException ex) {
             Logger.getLogger(MYSQLConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    public ObservableList<Member> getMember()
+    {
+        ObservableList<Member> member = FXCollections.observableArrayList();
+        String query="Select * From member";
+        try {
+          statement = con.createStatement();           
+          ResultSet rs =  statement.executeQuery(query);  
+          
+          while(rs.next()){
+              
+              String memberId=rs.getString("id");
+              String memberPassword=rs.getString("password");
+              String memberName=rs.getString("fname");
+              String memberSurname=rs.getString("lname");
+              String memberBirthDate=rs.getString("birth");
+              String memberEmail=rs.getString("mail");
+              String memberPhone=rs.getString("tel");
+              int memberBorrowingNumber=rs.getInt("borrowBookNum");
+              
+              member.add(new Member(memberId,memberPassword,memberName,memberSurname,memberBirthDate,memberEmail,memberPhone,memberBorrowingNumber));//creating member object
+              
+          }  
+        } catch (SQLException ex) {
+            Logger.getLogger(MYSQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return member;
+    }
     
     
     
