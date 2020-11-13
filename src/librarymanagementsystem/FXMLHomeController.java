@@ -34,6 +34,7 @@ import model.Books;
  * @author Musibet
  */
 public class FXMLHomeController implements Initializable {
+        
     
     @FXML
     private ImageView bookImage;
@@ -65,6 +66,10 @@ public class FXMLHomeController implements Initializable {
     private TableColumn<Books, Integer> favColumn;
     @FXML
     private TableColumn<Books, String> bookIdColumn;
+    
+    @FXML 
+    private ImageView searchBookButton;
+    
     
     MYSQLConnection connection=MYSQLConnection.getInstance();
     
@@ -159,5 +164,20 @@ public class FXMLHomeController implements Initializable {
         window.setScene(scene);
         window.show();
     }
+    
+    @FXML
+    private void searchButtonAction(MouseEvent event) throws IOException{
+    
+        Parent root5=FXMLLoader.load(getClass().getResource("FXMLSearch.fxml"));
+        Scene scene5=new Scene(root5);
+    
+    
+        Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene5);
+        window.show();
+        
+    }
+    
+    
     
 }

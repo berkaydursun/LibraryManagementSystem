@@ -42,6 +42,7 @@ public class SignUpController implements Initializable {
     MYSQLConnection connection=MYSQLConnection.getInstance();
     boolean control=true;
     
+    
     @FXML
     private TextField memberID;
 
